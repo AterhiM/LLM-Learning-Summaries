@@ -61,7 +61,7 @@ print(f'BLEU Score: {bleu_score:.4f}')
 
 * **BERTScore**: BERTScore employs cosine similarity to compare each token or n-gram in the generated output with the reference sentence. It excels at capturing synonyms and paraphrasing, making it valuable for tasks like image captioning and machine translation.
 
-***~ Example:***
+***~Example:***
 
 ```bash
 pip install bert-score
