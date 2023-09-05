@@ -34,7 +34,7 @@ To understand the effectiveness of language models, we often rely on several com
 
 * **ROUGE (Recall-Oriented Understudy for Gisting Evaluation)**: Unlike BLEU, ROUGE is **recall-oriented** and primarily used for automatic summarization tasks. It measures the overlap of words and n-grams between the output and the reference.
 
-***~ Example:***
+***~Example:***
 
 ```bash
 pip install nltk
