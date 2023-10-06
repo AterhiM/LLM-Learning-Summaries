@@ -1,6 +1,8 @@
 # Retrieval-Augmented Generation (RAG): To add External Knowledge
 
-**R**etrieval-**A**ugmented **G**eneration **(RAG)** enriches the model's input with external data. The idea is to provide more context to the model for improving the output. 
+## What is this "RAG"?
+
+Let's go straight to the point, **(RAG)** or **R**etrieval-**A**ugmented **G**eneration, enriches the model's input with external data. The idea is to provide more context to the model for improving the output. 
 
 This approach reduces misinformation, hallucinations, and offers cost-efficient access to a specific information, making it a valuable tool for improving language models' performance. 
 
@@ -32,23 +34,35 @@ RAG's roots lie in open-domain question-answering, where it retrieves relevant d
 
 **D**ense **P**assage **R**etrieval **(DPR)** is a key component of RAG, utilizing dense embeddings and training encoders to improve retrieval precision. 
 
-Two RAG approaches can be mentioned: 
+Two RAG approaches can be mentioned that differ in how they use retrieved documents for generating output:
 
-* RAG-Sequence; and 
+1. **RAG-Sequence**
+- In this approach, the model uses the same document to generate the complete output sequence.
+- It means that for each retrieved document, the model produces a full output sequence.
+- Then, it calculates the probability of each generated output sequence.
+- The probabilities are added up (marginalized) based on the likelihood of each document being retrieved.
+- Finally, the model selects the output sequence with the highest probability.
 
-* RAG-Token
+~*Example:* *[Viz for a search engine example]*
 
-These approaches differ in how they use retrieved documents for generating output.
+2. **RAG-Token**
+- In this approach, each token in the output is generated based on a different document.
+- The model first produces a distribution for the next output token for each of the retrieved documents.
+- These distributions represent the likelihood of a particular token given each document.
+- The model then combines these distributions to determine the next token.
+- This process is repeated for each token in the sequence.
+
+~*Example:* *[Viz for the same search engine example]*
 
 ## Fusion-in-Decoder (FiD): To Enhance open-domain QA
 
 **FiD** combines retrieval and generative models for open-domain question-answering (QA). 
 
-It efficiently (1) retrieves relevant passages, (2) processes them independently in the encoder, and then (3) aggregates context during decoding. 
+It efficiently **(1)** retrieves relevant passages, **(2)** processes them independently in the encoder, and then **(3)** aggregates context during decoding.
 
 This approach allows FiD to scale to a large number of passages while maintaining computational efficiency.
 
-### Overview of Fusion-in-Decoder
+### How does Fusion-in-Decoder work?
 
 FiD concatenates retrieved passages with questions and titles, processing them in the encoder. 
 
@@ -56,23 +70,48 @@ It employs special tokens to identify different sections and facilitates self-at
 
 During decoding, the decoder processes the encoded passages jointly to better incorporate context from multiple retrieved passages, improving the overall QA performance.
 
+*Read More about **FiD**: https://arxiv.org/abs/2212.08153*
+
 ## Retrieval-Enhanced Transformer (RETRO): Finer-grained retrieval during generation
 
 **RETRO** enhances generation using a combination of frozen BERT retrievers, differentiable encoders, and chunked cross-attention.
 
 It performs retrieval throughout the pre-training stage, allowing for finer-grained and repeated retrieval during generation, rather than a single retrieval per query.
 
-### Overview of RETRO
+### How does RETRO work?
 
-**RETRO** splits input sequences into chunks and retrieves relevant chunks based on the previous one to provide context for the current chunk. 
+Suppose we want to generate a detailed paragraph about the "World Cup 2030" using RETRO:
 
-The retrieval index consists of two contiguous chunks: 
+**1. Input Sequences Split into Chunks:**
 
-* The neighbor chunk: used for computing the key; and 
+The input text might be: **"The World Cup 2030 will be hosted in Morocco, Spain, and Portugal. It will gring together nations from across the globe to compete in the beautiful game."**
 
-* The continuation chunk from the original document.
+RETRO first splits this input into smaller, meaningful chunks, such as:
+- **Chunk 1:** "The World Cup 2030 will be hosted in Morocco, Spain, and Portugal."
+- **Chunk 2:** "It will gring together nations from across the globe to compete in the beautiful game."
 
-Retrieval relies on **A**pproximate **N**earest **N**eighbors **(ANN)** using Euclidean distance on BERT embeddings, and RETRO significantly improves model performance.
+**2. Chunk-Based Retrieval:**
+
+RETRO starts by retrieving relevant information for Chunk 1.
+It uses the RETRO retrieval method, which relies on **A**pproximate **N**earest **N**eighbors (**ANN**) and **BERT** embeddings to find similar chunks from a large collection of documents.
+
+Let's say it retrieves additional information about the 2030 World Cup from various sources for Chunk 1.
+
+**3. Contextual Information:**
+
+Now that RETRO has retrieved additional information for Chunk 1, it uses this context to generate the next chunk, which is Chunk 2.
+
+When generating Chunk 2 ("It will gring together nations from across the globe to compete in the beautiful game."), RETRO knows more about the 2030 World Cup due to the information retrieved for Chunk 1.
+
+It can generate a more contextually relevant and detailed description based on the retrieved data.
+
+**4. Repeated Retrieval:**
+
+RETRO continues this process of splitting the input into chunks and retrieving information.
+
+For each new chunk, it retrieves relevant data based on the previous chunk, allowing for fine-grained and context-aware generation.
+
+*Read More about **RETRO**: https://arxiv.org/abs/2112.04426*
 
 ## Internet-augmented Language Models: Leveraging web search for augmentation
 
