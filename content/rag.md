@@ -36,6 +36,8 @@ RAG's roots lie in open-domain question-answering, where it retrieves relevant d
 
 Two RAG approaches can be mentioned that differ in how they use retrieved documents for generating output:
 
+![RAG Approaches with Example](../images/rag/rag_approaches.png)
+
 1. **RAG-Sequence**
 - In this approach, the model uses the same document to generate the complete output sequence.
 - It means that for each retrieved document, the model produces a full output sequence.
@@ -43,16 +45,12 @@ Two RAG approaches can be mentioned that differ in how they use retrieved docume
 - The probabilities are added up (marginalized) based on the likelihood of each document being retrieved.
 - Finally, the model selects the output sequence with the highest probability.
 
-~*Example:* *[Viz for a search engine example]*
-
 2. **RAG-Token**
 - In this approach, each token in the output is generated based on a different document.
 - The model first produces a distribution for the next output token for each of the retrieved documents.
 - These distributions represent the likelihood of a particular token given each document.
 - The model then combines these distributions to determine the next token.
 - This process is repeated for each token in the sequence.
-
-~*Example:* *[Viz for the same search engine example]*
 
 ## Fusion-in-Decoder (FiD): To Enhance open-domain QA
 
