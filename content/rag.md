@@ -34,7 +34,9 @@ RAG's roots lie in open-domain question-answering, where it retrieves relevant d
 
 **D**ense **P**assage **R**etrieval **(DPR)** is a key component of RAG, utilizing dense embeddings and training encoders to improve retrieval precision. 
 
-Two RAG approaches can be mentioned that differ in how they use retrieved documents for generating output:
+You can check a very nice application of DPR and Long-Format Question Answering with Question generation in [this repo](https://github.com/Taizoukt1878/Question-Generation-and-Long-Form-Question-Answering) by [@Taizoukt1878](https://github.com/Taizoukt1878).
+
+Moving from the application, RAG is mainly composed of two approaches that differ in how they use retrieved documents for generating output:
 
 ![RAG Approaches with Example](../images/rag/rag_approaches.png)
 
