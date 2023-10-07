@@ -115,31 +115,35 @@ For each new chunk, it retrieves relevant data based on the previous chunk, allo
 
 ## Internet-augmented Language Models: Leveraging web search for augmentation
 
-Internet-augmented Language Models use web search engines to enhance language models. They (1) Retrieve relevant documents from search results, (2) Segment them into paragraphs, and (3) Use TF-IDF and cosine similarity to rank paragraphs. 
+Internet-augmented Language Models are another way that uses web search engines to enhance language models. 
+
+They (1) Retrieve relevant documents from search results, (2) Segment them into paragraphs, and (3) Use TF-IDF and cosine similarity to rank paragraphs.
 
 This approach enriches language models with up-to-date and diverse information.
 
-### Overview of Internet-augmented LLMs
-
-Retrieved paragraphs are used to condition language models via few-shot prompting, extending conventional question-answer pairs with evidence paragraphs. 
+Retrieved paragraphs are used to condition language models via few-shot prompting, extending conventional question-answer pairs with evidence paragraphs.
 
 ## RAG for CodeT5+: To Enhance code generation with retrieval
 
-RAG has been applied to code generation tasks, particularly in combination with **CodeT5+**. 
+Moving on from text to code generation.
 
-It improves code generation by leveraging retrieval to provide crucial context for generating accurate code. 
+RAG has been applied to code generation tasks, particularly in combination with [**CodeT5+**](https://arxiv.org/abs/2305.07922). 
 
-RAG for CodeT5+ offers three settings: 
+It improves code generation by leveraging retrieval to provide crucial context for generating accurate pieces of code.
 
-* Retrieval-based, 
+### More into RAG for CodeT5+
 
-* Generative-only, and 
+RAG for CodeT5+ presents users with a versatile trio of settings: 
 
-* Retrieval-augmented,
+- Retrieval-based; 
+- Generative-only; and 
+- Retrieval-augmented, 
 
-each with its advantages in different scenarios.
+Each of these settings is tailored to excel in distinct scenarios. 
 
-Retrieved code samples are used to enhance code generation. The retrieved code serves as valuable context, guiding the generative system to produce more accurate and contextually relevant code compared to generative-only approaches.
+In essence, these settings harness the power of retrieved code samples to elevate code generation, mirroring their impact on textual content. 
+
+By leveraging retrieved code as a rich contextual foundation, this approach empowered the generative system to craft code that is not only more precise but also inherently contextually aligned, surpassing the capabilities of generative-only methods.
 
 ## Hypothetical Document Embeddings (HyDE): A solution for relevance modeling
 
@@ -149,20 +153,28 @@ It generates hypothetical documents using language models, encodes them into emb
 
 This approach reframes relevance modeling as a generation task, providing a solution for situations where relevance judgments are unavailable.
 
-### Overview of HyDE
+### How does HyDE work?
 
-**HyDE** prompts a language model to generate hypothetical documents, encodes them into embeddings, and computes their similarity with real documents. 
+**HyDE** prompts a language model to generate hypothetical documents, encodes them into embeddings, and computes their similarity with real documents.
 
 By using an unsupervised encoder, non-factual details are excluded, making it a viable solution for relevance modeling in data-scarce scenarios.
 
+Read more about **HyDE** here: https://arxiv.org/abs/2212.10496
+
+Also a nice and easy tutorial frol [@langchain-ai](https://github.com/langchain-ai/langchain) about [Improving document indexing with HyDE](https://python.langchain.com/docs/use_cases/question_answering/how_to/hyde#:~:text=At%20a%20high%20level%2C%20HyDE,that%20as%20the%20final%20example.)
+
 ## How to apply RAG: Practical considerations
 
-To apply RAG effectively, a hybrid retrieval approach 
+To apply RAG effectively, a hybrid retrieval approach combining traditional search indices with embedding-based search is recommended.
 
-combining traditional search indices with embedding-based search is recommended. 
+This approach overcomes limitations in both keyword-based and embedding-based searches, ensuring robust and contextually relevant information retrieval:
 
-This approach overcomes limitations in both keyword-based and embedding-based searches, ensuring robust and contextually relevant information retrieval. 
+- **Text Embedding models:** Various text embedding models are available, each with its strengths, making it crucial to choose the right one based on specific requirements and benchmarks. 
 
-Various text embedding models are available, each with its strengths, making it crucial to choose the right one based on specific requirements and benchmarks. 
-
-Additionally, employing Approximate Nearest Neighbors (ANN) search indices optimizes retrieval speed and efficiency, and several techniques, including LSH, FAISS, HNSW, and ScaNN, can be utilized to build efficient ANN indices based on different functional and non-functional requirements.
+- **Search Indices**: Employing Approximate Nearest Neighbors (ANN) search indices optimizes retrieval speed and efficiency, and several techniques, including: 
+    - [Locality Sensitive Hashing (LSH)](https://www.pinecone.io/learn/series/faiss/locality-sensitive-hashing/)
+    - [Facebook AI Similarity Search (FAISS)](https://ai.meta.com/tools/faiss/)
+    - [Hierarchical Navigable Small World (HNSW)](https://www.pinecone.io/learn/series/faiss/hnsw/)
+    - [Scalable Nearest Neighbors (ScaNN)](https://github.com/google-research/google-research/tree/master/scann)
+    
+All these techniques can be utilized to build efficient ANN indices based on different functional and non-functional requirements.
