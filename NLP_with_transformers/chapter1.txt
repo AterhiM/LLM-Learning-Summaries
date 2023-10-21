@@ -1,0 +1,8 @@
+   Language is at the core of human communication, and for centuries, we've endeavored to unravel how it is intricately woven into 
+our cognitive processes. Today, we are on a quest to advance further by introducing computers to the realm of human language 
+through Natural Language Processing (NLP). NLP is an artificial intelligence branch dedicated to harnessing machine learning
+techniques for a wide range of language-related tasks.
+    In recent years, NLP has witnessed a remarkable evolution with the emergence of transformative techniques such as transformers, 
+the encoder-decoder framework, and the attention mechanism. These innovations have reshaped the landscape of NLP. To gain a deep 
+understanding of these developments, one of the most valuable resources is the book on NLP with transformers, which we are 
+summarizing in this series of articles.
