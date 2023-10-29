@@ -1,8 +1,0 @@
-The first chapter structure.
--An short introduction presenting an overview of the book and the big updates in the NLP world.
--The encoder-decoder framework.
--Attention mechanism.
--the problem of analyzing long sequences of text using RNN, and introducing the self-attention mechanism
--Transfer learning in NLP.
-- Introducing the transformers framework.
--Transformers use cases with code examples.
